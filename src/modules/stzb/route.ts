@@ -3,7 +3,7 @@ import HeroView from "./views/Hero.vue";
 /**
  * 条件路由
  */
-export const StzbRoute = [
+export const stzbRoute = [
     {
         path: '/hero',
         name: 'hero',

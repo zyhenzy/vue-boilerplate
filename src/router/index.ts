@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Layout from '../components/layout/Layout.vue'
-import {StzbRoute} from "@/modules/stzb/route";
+import {stzbRoute} from "@/modules/stzb/route";
+import {chartRoute} from "@/modules/chart/route";
 
 const REDIRECT_NAME = 'about' // 重定向路由
 
@@ -21,7 +22,8 @@ const router = createRouter({
           // which is lazy-loaded when the route is visited.
           component: () => import('../views/AboutView.vue'),
         },
-        ...StzbRoute
+        ...stzbRoute,
+        ...chartRoute
       ]
     }
   ],
