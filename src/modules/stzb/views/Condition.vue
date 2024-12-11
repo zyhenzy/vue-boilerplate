@@ -60,10 +60,8 @@
         </template>
         <template v-else-if="column.key === 'action'">
           <span>
-            666
-<!--            <a-button @click='handlePerform(record)' size='small'>执行</a-button>-->
-<!--            <a-button @click='handleToDetail(record)' size='small'>查看</a-button>-->
-<!--            <a-button @click='handleDelete(record)' size='small'>删除</a-button>-->
+            <a-button @click='handlePerform(record)' size='small'>执行</a-button>
+            <a-button @click='handleDelete(record)' size='small'>删除</a-button>
           </span>
         </template>
       </template>
@@ -74,7 +72,7 @@
 <script setup lang="ts">
 import {onMounted, ref} from 'vue'
 import {COLUMNS} from '../condition.config'
-import {requestConditionList} from '../api'
+import {requestConditionDelete, requestConditionList, requestPreform} from '../api'
 import type {ICondition} from "@/modules/stzb/api/data";
 
 const tableData = ref<ICondition[]>([])
@@ -83,11 +81,21 @@ onMounted(async () => {
   await fetchConditionList()
 })
 
-
 // 获取检索列表
 const fetchConditionList = async () => {
   const res = await requestConditionList()
   tableData.value = res.data.data
+}
+
+// 执行任务
+const handlePerform = (search: ICondition) => {
+  requestPreform(search)
+}
+
+// 删除
+const handleDelete = async (condition: ICondition) => {
+  await requestConditionDelete(condition.id)
+  await fetchConditionList()
 }
 
 </script>

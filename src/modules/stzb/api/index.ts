@@ -10,17 +10,17 @@
 
 import request from "@/utils/request/request";
 import requestNoRepeat from "@/utils/request/request-no-repeat";
-import type { ICondition, IConditionCreate, IConditionUpdate} from "./data";
+import type {ICondition, IConditionCreate} from "./data";
 import {cloneDeep} from "lodash-es";
 
 /**
  * 新增条件
  */
 export const requestConditionCreate = (data: IConditionCreate) => {
-    const params = cloneDeep(data)
-    params.priceMin = params.priceMin*100
-    params.priceMax = params.priceMax*100
-    return request.post('/api/condition', params)
+  const params = cloneDeep(data)
+  params.priceMin = params.priceMin * 100
+  params.priceMax = params.priceMax * 100
+  return request.post('/api/condition', params)
 }
 
 /**
@@ -28,27 +28,20 @@ export const requestConditionCreate = (data: IConditionCreate) => {
  * @param id
  */
 export const requestConditionDelete = (id: string) => {
-    return request.delete(`/api/condition/${id}`)
-}
-
-/**
- * 修改条件
- */
-export const requestConditionUpdate = (params: IConditionUpdate) => {
-    return request.put('/mock/stzb', params)
+  return request.delete(`/api/condition/${id}`)
 }
 
 /**
  * 获取条件列表
  */
 export const requestConditionList = () => {
-    return requestNoRepeat.get<ICondition[]>('/api/conditions')
+  return requestNoRepeat.get<ICondition[]>('/api/conditions')
 }
 
 /**
- * 获取条件详情
- * @param id
+ * 执行条件
+ * @param params
  */
-export const requestConditionById = (id: string) => {
-    return request.get<ICondition>(`/mock/hero/${id}`)
+export const requestPreform = (params: ICondition) => {
+  return request.post('/api/conditions/perform', params)
 }
