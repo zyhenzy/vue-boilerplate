@@ -42,7 +42,7 @@ export const requestConditionUpdate = (params: IConditionUpdate) => {
  * 获取条件列表
  */
 export const requestConditionList = () => {
-    return requestNoRepeat.get<ICondition[]>('/api/condition')
+    return requestNoRepeat.get<ICondition[]>('/api/conditions')
 }
 
 /**

@@ -7,6 +7,7 @@ export interface ICondition {
     priceMax: number; // 最大金额
     passFairShow: string; // 公示期 0：公示期 1：非公示期 2 所有
     cardHeroId: string[]
+    heroNames: string[]
     skillId: string[]
     advanceNum: number // 进阶
     apprentice: boolean // 试师

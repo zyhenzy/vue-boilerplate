@@ -8,10 +8,10 @@
             {{record.priceMin / 100}} - {{record.priceMax / 100}}
           </span>
         </template>
-        <template v-else-if="column.key === 'cardHeroId'">
+        <template v-else-if="column.key === 'heroNames'">
           <span>
-            <a-tag v-for='heroId in record.cardHeroId' :key='heroId'>
-              {{ heroId }}
+            <a-tag v-for='(hero,heroIndex) in record.heroNames' :key='heroIndex'>
+              {{ hero }}
             </a-tag>
           </span>
         </template>
