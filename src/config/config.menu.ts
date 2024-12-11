@@ -1,4 +1,4 @@
-import { BranchesOutlined, PartitionOutlined } from '@ant-design/icons-vue'
+import { BranchesOutlined } from '@ant-design/icons-vue'
 
 export const MENUS = [
   {
@@ -12,6 +12,12 @@ export const MENUS = [
     name: '英雄',
     icon: BranchesOutlined,
     path: '/hero',
+  },
+  {
+    key: 'condition',
+    name: '条件',
+    icon: BranchesOutlined,
+    path: '/condition',
   },
   {
     key: 'about',
