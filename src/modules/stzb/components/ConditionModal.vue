@@ -40,11 +40,10 @@
           mode='multiple'
           size='small'
           placeholder='请选择英雄'
-        >
-            <a-select-option v-for='hero in heroes' :key='hero.id' :value='hero.id'>
-              {{ hero.name }}{{hero.country}}({{hero.score}})
-            </a-select-option>
-        </a-select>
+          show-search
+          :options='heroesOptions'
+          :filter-option="filterOption"
+        ></a-select>
       </a-form-item>
 
       <a-form-item label='进阶' name='advanceNum'>
@@ -78,6 +77,10 @@ import type {IConditionCreate} from "@/modules/stzb/api/data";
 import {requestConditionCreate} from "@/modules/stzb/api";
 import {useHeroStore} from "@/modules/stzb/stores/hero";
 
+type Option = {
+  label: string;
+  value: string | number;
+};
 
 // 初始化form数据
 const initialForm = {
@@ -97,14 +100,23 @@ const state = reactive<{ formState: IConditionCreate }>({
   formState: cloneDeep(initialForm)
 })
 
-const heroes = computed(()=>{
-  return heroStore.heroes
+const heroesOptions = computed(():Option[]=>{
+  return heroStore.heroes.map(hero => {
+    return {
+      label: `${hero.name}(${hero.score})`,
+      value: hero.id
+    }
+  })
 })
 
 // 打开Modal
 const open = async () => {
   visible.value = true
 }
+
+const filterOption = (input: string, option: Option) => {
+  return option.label.indexOf(input) >= 0;
+};
 
 /**
  * 确定按钮
