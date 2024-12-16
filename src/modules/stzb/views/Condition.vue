@@ -1,5 +1,8 @@
 <template>
   <div class="condition">
+    <div>
+      <a-button type='primary' @click='openModal'>新增</a-button>
+    </div>
     <a-table :columns='COLUMNS' :data-source='tableData' :scroll='{ x: 1200 }' size='small'
              :pagination="false" bordered>
       <template #bodyCell='{ column, record }'>
@@ -67,24 +70,38 @@
       </template>
     </a-table>
   </div>
+  <condition-modal ref="conditionRef" @save-condition="fetchConditionList"/>
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from 'vue'
+import {computed, onMounted, ref} from 'vue'
 import {COLUMNS} from '../condition.config'
 import {requestConditionDelete, requestConditionList, requestPreform} from '../api'
 import type {ICondition} from "@/modules/stzb/api/data";
+import {useHeroStore} from "@/modules/stzb/stores/hero";
+import ConditionModal from "@/modules/stzb/components/ConditionModal.vue";
 
+const heroStore = useHeroStore()
+const conditionRef = ref<InstanceType<typeof ConditionModal>>()
 const tableData = ref<ICondition[]>([])
 
 onMounted(async () => {
+  await heroStore.fetchHero()
   await fetchConditionList()
+})
+
+const heroes = computed(()=>{
+  return heroStore.heroes
 })
 
 // 获取检索列表
 const fetchConditionList = async () => {
   const res = await requestConditionList()
   tableData.value = res.data.data
+}
+
+const openModal = () =>{
+  conditionRef.value?.open()
 }
 
 // 执行任务

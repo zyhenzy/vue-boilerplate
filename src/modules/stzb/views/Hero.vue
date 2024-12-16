@@ -1,7 +1,7 @@
 <template>
   <div class="hero">
     <h1>hero page</h1>
-    <table>
+    <table class="table-1">
       <thead>
       <tr>
         <th>ID</th>
@@ -34,31 +34,46 @@
   </div>
 </template>
 
+<script setup lang='ts'>
+import {onMounted} from "vue";
+import {testData} from "@/modules/stzb/const";
+
+onMounted(()=>{
+  const obj = JSON.parse(testData.equip_desc)
+  console.log(obj)
+  debugger
+})
+</script>
+
 <style lang="scss">
 .hero {
-  table {
+  .table-1 {
     width: 100%;
     border-collapse: collapse;
-    border: 1px solid #ddd; /* Add border to the table */
+    position: relative;
+    //border-collapse: separate;
+    //border-spacing: 0;
+    //border: 1px solid red; /* Add border to the table */
 
+    &::before{
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 1px solid red; /* Outer border */
+      pointer-events: none;
+    }
+
+    th, td {
+      //border-top: 1px solid #ddd;
+      //border-bottom: 1px solid #ddd;
+      //border-left: none;
+      //border-right: none;
+      border: 1px solid black;
+      padding: 8px;
+    }
   }
-  th, td {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    border-left: none;
-    border-right: none;
-    //border: 1px solid #ddd;
-    padding: 8px;
-  }
-  th {
-    background-color: #f2f2f2;
-    text-align: left;
-  }
-  //tr:nth-child(even) {
-  //  background-color: #f9f9f9;
-  //}
-  //tr:hover {
-  //  background-color: #ddd;
-  //}
 }
 </style>

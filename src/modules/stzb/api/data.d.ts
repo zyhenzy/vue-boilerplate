@@ -17,7 +17,7 @@ export interface ICondition {
 /**
  * 新增条件
  */
-export type IConditionCreate = Omit<ICondition, 'id'>
+export type IConditionCreate = Omit<ICondition, 'id'|'heroNames'>
 
 /**
  * 修改条件
@@ -31,4 +31,11 @@ export interface IConditionUpdate extends Partial<ICondition> {
 export interface Account{
     id:string // 主键
     [key: string]: any;
+}
+
+export interface Hero{
+  id: number;
+  name: string;
+  country: string; // '国家 1:汉 2：魏 3：蜀 4：吴 5：群'
+  score: number;
 }

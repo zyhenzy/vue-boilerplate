@@ -10,7 +10,7 @@
 
 import request from "@/utils/request/request";
 import requestNoRepeat from "@/utils/request/request-no-repeat";
-import type {ICondition, IConditionCreate} from "./data";
+import type {Hero, ICondition, IConditionCreate} from "./data";
 import {cloneDeep} from "lodash-es";
 
 /**
@@ -35,7 +35,7 @@ export const requestConditionDelete = (id: string) => {
  * 获取条件列表
  */
 export const requestConditionList = () => {
-  return requestNoRepeat.get<ICondition[]>('/api/conditions')
+  return requestNoRepeat.get<ICondition[]>('/api/condition')
 }
 
 /**
@@ -44,4 +44,11 @@ export const requestConditionList = () => {
  */
 export const requestPreform = (params: ICondition) => {
   return request.post('/api/conditions/perform', params)
+}
+
+/**
+ * 查询所有英雄
+ */
+export const requestHeroes = ()=>{
+  return request.get<Hero[]>('/api/hero')
 }
