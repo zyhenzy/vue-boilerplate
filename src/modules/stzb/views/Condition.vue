@@ -64,6 +64,7 @@
         <template v-else-if="column.key === 'action'">
           <span>
             <a-button @click='handlePerform(record)' size='small'>执行</a-button>
+            <a-button @click='handleToDetail(record)' size='small'>查看</a-button>
             <a-button @click='handleDelete(record)' size='small'>删除</a-button>
           </span>
         </template>
@@ -80,18 +81,16 @@ import {requestConditionDelete, requestConditionList, requestPreform} from '../a
 import type {ICondition} from "@/modules/stzb/api/data";
 import {useHeroStore} from "@/modules/stzb/stores/hero";
 import ConditionModal from "@/modules/stzb/components/ConditionModal.vue";
+import {useRouter} from "vue-router";
 
 const heroStore = useHeroStore()
 const conditionRef = ref<InstanceType<typeof ConditionModal>>()
 const tableData = ref<ICondition[]>([])
+const router = useRouter()
 
 onMounted(async () => {
   await heroStore.fetchHero()
   await fetchConditionList()
-})
-
-const heroes = computed(()=>{
-  return heroStore.heroes
 })
 
 // 获取检索列表
@@ -107,6 +106,16 @@ const openModal = () =>{
 // 执行任务
 const handlePerform = (search: ICondition) => {
   requestPreform(search)
+}
+
+// 查看详情
+const handleToDetail = (condition: ICondition) => {
+  router.push({
+    name: 'Account',
+    params: {
+      id: condition.id
+    }
+  })
 }
 
 // 删除

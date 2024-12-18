@@ -10,8 +10,15 @@
 
 import request from "@/utils/request/request";
 import requestNoRepeat from "@/utils/request/request-no-repeat";
-import type {Hero, ICondition, IConditionCreate} from "./data";
+import type {Account, Hero, ICondition, IConditionCreate} from "./data";
 import {cloneDeep} from "lodash-es";
+
+/**
+ * 查询所有英雄
+ */
+export const requestHeroes = ()=>{
+  return request.get<Hero[]>('/api/hero')
+}
 
 /**
  * 新增条件
@@ -43,12 +50,14 @@ export const requestConditionList = () => {
  * @param params
  */
 export const requestPreform = (params: ICondition) => {
-  return request.post('/api/conditions/perform', params)
+  return request.post('/api/condition/perform', params)
 }
 
+
 /**
- * 查询所有英雄
+ * 查看详情
+ * @param id
  */
-export const requestHeroes = ()=>{
-  return request.get<Hero[]>('/api/hero')
+export const requestSearchDetail = (id: string) => {
+  return request.get<Account[]>(`/api/account/findByCondition/${id}`)
 }
