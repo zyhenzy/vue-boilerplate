@@ -1,7 +1,6 @@
 <template>
   <div class="account">
-    <a-table :columns='ACCOUNT_COLUMNS' :data-source='tableData' :scroll='{ x: 1200 }' size='small'
-             :pagination="false" bordered>
+    <a-table :columns='ACCOUNT_COLUMNS' :data-source='tableData' :scroll='{ x: 1200 }' size='small' bordered>
       <template #bodyCell='{ column, record }'>
         <template v-if="column.key === 'price'">
           <span>
@@ -26,7 +25,9 @@
 
         <template v-if="column.key === 'action'">
           <span>
-            <a-button @click='handleToDetail(record)' size='small'>查看</a-button>
+            <a-button size='small' @click='handleGo(record)'>跳转</a-button>
+            <a-button size='small' @click='handleUpdatePrice(record)'>改价</a-button>
+<!--            <a-button @click='handleToDetail(record)' size='small'>查看</a-button>-->
           </span>
         </template>
       </template>
@@ -36,10 +37,11 @@
 
 <script setup lang="ts">
 import {onMounted, ref} from 'vue'
-import { requestSearchDetail} from '../api'
+import {requestSearchDetail, requestUpdatePrice} from '../api'
 import type {Account} from "@/modules/stzb/api/data";
 import { useRoute } from 'vue-router'
 import {ACCOUNT_COLUMNS} from "@/modules/stzb/condition.config";
+import {message} from "ant-design-vue";
 
 const tableData = ref<Account[]>([])
 
@@ -60,8 +62,26 @@ const fetchAccountList = async () => {
 }
 
 // 查看详情
-const handleToDetail = (account: Account) => {
-  console.log(account)
+// const handleToDetail = (account: Account) => {
+//   console.log(account)
+// }
+
+// 跳转到链接
+const handleGo = (account: Account) => {
+  window.open(`https://stzb.cbg.163.com/cgi/mweb/equip/1/${account.id}`)
+}
+
+/**
+ * 改价
+ * @param account
+ */
+const handleUpdatePrice = async (account: Account) => {
+  const priceStr = window.prompt('请输入中介价格')
+  if(priceStr){
+    await requestUpdatePrice({id:account.id,price:Number(priceStr)})
+    await fetchAccountList()
+    message.success('改价成功')
+  }
 }
 </script>
 

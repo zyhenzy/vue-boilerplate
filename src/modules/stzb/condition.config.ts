@@ -1,69 +1,69 @@
 export const COLUMNS = [
-    {
-        name: '金额',
-        dataIndex: 'price',
-        key: 'price',
-        width: 300
-    },
-    {
-        title: '英雄',
-        dataIndex: 'heroNames',
-        key: 'heroNames',
-        width: 360
-    },
-    {
-        title: '进阶',
-        key: 'advanceNum',
-        dataIndex: 'advanceNum',
-        width: 60
-    },
-    {
-      title: '战法',
-      dataIndex: 'skillId',
-      key: 'skillId',
-      width: 360
-    },
-    {
-        title: '公示期',
-        dataIndex: 'passFairShow',
-        key: 'passFairShow',
-        width: 60
-    },
-    {
-        title: '是否试师',
-        dataIndex: 'apprentice',
-        key: 'apprentice',
-        width: 40
-    },
-    {
-        title: '赛季最高分',
-        dataIndex: 'maxSeasonScore',
-        key: 'maxSeasonScore',
-        width: 60
-    },
-    {
-        title: '核心最高分',
-        dataIndex: 'maxCoreScore',
-        key: 'maxCoreScore',
-        width: 60
-    },
-    {
-        title: '综合最高分',
-        dataIndex: 'maxScore',
-        key: 'maxScore',
-        width: 60
-    },
-    {
-        title: '备注',
-        dataIndex: 'remark',
-        key: 'remark',
-        width: 120
-    },
-    {
-        title: '操作',
-        key: 'action',
-        width: 210
-    }
+  {
+    name: '金额',
+    dataIndex: 'price',
+    key: 'price',
+    width: 300
+  },
+  {
+    title: '英雄',
+    dataIndex: 'heroNames',
+    key: 'heroNames',
+    width: 360
+  },
+  {
+    title: '进阶',
+    key: 'advanceNum',
+    dataIndex: 'advanceNum',
+    width: 60
+  },
+  {
+    title: '战法',
+    dataIndex: 'skillId',
+    key: 'skillId',
+    width: 360
+  },
+  {
+    title: '公示期',
+    dataIndex: 'passFairShow',
+    key: 'passFairShow',
+    width: 60
+  },
+  {
+    title: '是否试师',
+    dataIndex: 'apprentice',
+    key: 'apprentice',
+    width: 40
+  },
+  {
+    title: '赛季最高分',
+    dataIndex: 'maxSeasonScore',
+    key: 'maxSeasonScore',
+    width: 60
+  },
+  {
+    title: '核心最高分',
+    dataIndex: 'maxCoreScore',
+    key: 'maxCoreScore',
+    width: 60
+  },
+  {
+    title: '综合最高分',
+    dataIndex: 'maxScore',
+    key: 'maxScore',
+    width: 60
+  },
+  {
+    title: '备注',
+    dataIndex: 'remark',
+    key: 'remark',
+    width: 120
+  },
+  {
+    title: '操作',
+    key: 'action',
+    width: 210
+  }
 ]
 
 export const ACCOUNT_COLUMNS = [
@@ -79,7 +79,7 @@ export const ACCOUNT_COLUMNS = [
     key: 'price',
     width: 120,
     sorter: {
-      compare: (a, b) => a.price - b.price
+      compare: (a: number, b: number) => a.price - b.price
     }
   },
   {
@@ -88,7 +88,7 @@ export const ACCOUNT_COLUMNS = [
     key: 'intermediaryPrice',
     width: 120,
     sorter: {
-      compare: (a, b) => a.intermediaryPrice - b.intermediaryPrice
+      compare: (a: number, b: number) => a.intermediaryPrice - b.intermediaryPrice
     }
   },
   {
@@ -97,7 +97,7 @@ export const ACCOUNT_COLUMNS = [
     key: 'heroPrice',
     width: 120,
     sorter: {
-      compare: (a, b) => a.heroPrice - b.heroPrice
+      compare: (a: number, b: number) => a.heroPrice - b.heroPrice
     }
   },
   {
@@ -106,7 +106,7 @@ export const ACCOUNT_COLUMNS = [
     key: 'weaponPrice',
     width: 120,
     sorter: {
-      compare: (a, b) => a.weaponPrice - b.weaponPrice
+      compare: (a: number, b: number) => a.weaponPrice - b.weaponPrice
     }
   },
   // {
@@ -174,7 +174,7 @@ export const ACCOUNT_COLUMNS = [
     key: 'seasonScore',
     width: 60,
     sorter: {
-      compare: (a, b) => a.seasonScore - b.seasonScore
+      compare: (a: number, b: number) => a.seasonScore - b.seasonScore
     }
   },
   {
@@ -183,7 +183,7 @@ export const ACCOUNT_COLUMNS = [
     key: 'seasonScoreRate',
     width: 60,
     sorter: {
-      compare: (a, b) => a.seasonScoreRate - b.seasonScoreRate
+      compare: (a: number, b: number) => a.seasonScoreRate - b.seasonScoreRate
     }
   },
   {
@@ -192,7 +192,7 @@ export const ACCOUNT_COLUMNS = [
     key: 'score',
     width: 60,
     sorter: {
-      compare: (a, b) => a.score - b.score
+      compare: (a: number, b: number) => a.score - b.score
     }
   },
   {
@@ -201,7 +201,7 @@ export const ACCOUNT_COLUMNS = [
     key: 'scoreRate',
     width: 60,
     sorter: {
-      compare: (a, b) => a.scoreRate - b.scoreRate
+      compare: (a: number, b: number) => a.scoreRate - b.scoreRate
     }
   },
   {

@@ -2,6 +2,7 @@
   <div class="condition">
     <div>
       <a-button type='primary' @click='openModal'>新增</a-button>
+      <a-button type='primary' @click='handleSetCookie'>设置Cookie</a-button>
     </div>
     <a-table :columns='COLUMNS' :data-source='tableData' :scroll='{ x: 1200 }' size='small'
              :pagination="false" bordered>
@@ -77,7 +78,7 @@
 <script setup lang="ts">
 import { onMounted, ref} from 'vue'
 import {COLUMNS} from '../condition.config'
-import {requestConditionDelete, requestConditionList, requestPreform} from '../api'
+import {requestConditionDelete, requestConditionList, requestPreform, requestSetCookie} from '../api'
 import type {ICondition} from "@/modules/stzb/api/data";
 import {useHeroStore} from "@/modules/stzb/stores/hero";
 import ConditionModal from "@/modules/stzb/components/ConditionModal.vue";
@@ -101,6 +102,14 @@ const fetchConditionList = async () => {
 
 const openModal = () =>{
   conditionRef.value?.open()
+}
+
+// 设置cookie
+const handleSetCookie = async () => {
+  const cookie = window.prompt('请输入cookie')
+  if(cookie){
+    await requestSetCookie(cookie as string)
+  }
 }
 
 // 执行任务
