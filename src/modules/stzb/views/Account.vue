@@ -5,10 +5,26 @@
       <template #bodyCell='{ column, record }'>
         <template v-if="column.key === 'price'">
           <span>
-            {{record.priceMin / 100}} - {{record.priceMax / 100}}
+            {{record.price/100}}
           </span>
         </template>
-        <template v-else-if="column.key === 'action'">
+        <template v-if="column.key === 'intermediaryPrice'">
+          <span>
+            {{record.intermediaryPrice/100}}
+          </span>
+        </template>
+        <template v-if="column.key === 'heroPrice'">
+          <span>
+            {{record.heroPrice/100}}
+          </span>
+        </template>
+        <template v-if="column.key === 'weaponPrice'">
+          <span>
+            {{record.weaponPrice/100}}
+          </span>
+        </template>
+
+        <template v-if="column.key === 'action'">
           <span>
             <a-button @click='handleToDetail(record)' size='small'>查看</a-button>
           </span>

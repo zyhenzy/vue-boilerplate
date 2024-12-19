@@ -75,7 +75,7 @@
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted, ref} from 'vue'
+import { onMounted, ref} from 'vue'
 import {COLUMNS} from '../condition.config'
 import {requestConditionDelete, requestConditionList, requestPreform} from '../api'
 import type {ICondition} from "@/modules/stzb/api/data";

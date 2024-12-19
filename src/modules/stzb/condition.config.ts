@@ -93,11 +93,11 @@ export const ACCOUNT_COLUMNS = [
   },
   {
     title: '卡片金额',
-    dataIndex: 'cardPrice',
-    key: 'cardPrice',
+    dataIndex: 'heroPrice',
+    key: 'heroPrice',
     width: 120,
     sorter: {
-      compare: (a, b) => a.cardPrice - b.cardPrice
+      compare: (a, b) => a.heroPrice - b.heroPrice
     }
   },
   {
@@ -109,56 +109,56 @@ export const ACCOUNT_COLUMNS = [
       compare: (a, b) => a.weaponPrice - b.weaponPrice
     }
   },
-  {
-    title: '标签',
-    dataIndex: 'tag',
-    key: 'tag',
-    sorter: {
-      compare: (a, b) => a.tag.length - b.tag.length
-    }
-  },
-  {
-    title: '武将标签',
-    dataIndex: 'heroTag',
-    key: 'heroTag',
-    sorter: {
-      compare: (a, b) => a.heroTag.length - b.heroTag.length
-    }
-  },
-  {
-    title: '战法标签',
-    dataIndex: 'skillTag',
-    key: 'skillTag',
-    sorter: {
-      compare: (a, b) => a.skillTag.length - b.skillTag.length
-    }
-  },
-  {
-    title: '四通',
-    dataIndex: 'siTong',
-    key: 'siTong',
-    sorter: {
-      compare: (a, b) => a.siTong - b.siTong
-    }
-  },
-  {
-    title: '试师',
-    dataIndex: 'apprentice',
-    key: 'apprentice',
-    width: 60,
-    sorter: {
-      compare: (a, b) => a.apprentice - b.apprentice
-    }
-  },
-  {
-    title: '公示期',
-    dataIndex: 'passFairShow',
-    key: 'passFairShow',
-    width: 60,
-    sorter: {
-      compare: (a, b) => a.passFairShow - b.passFairShow
-    }
-  },
+  // {
+  //   title: '标签',
+  //   dataIndex: 'tag',
+  //   key: 'tag',
+  //   sorter: {
+  //     compare: (a, b) => a.tag.length - b.tag.length
+  //   }
+  // },
+  // {
+  //   title: '武将标签',
+  //   dataIndex: 'heroTag',
+  //   key: 'heroTag',
+  //   sorter: {
+  //     compare: (a, b) => a.heroTag.length - b.heroTag.length
+  //   }
+  // },
+  // {
+  //   title: '战法标签',
+  //   dataIndex: 'skillTag',
+  //   key: 'skillTag',
+  //   sorter: {
+  //     compare: (a, b) => a.skillTag.length - b.skillTag.length
+  //   }
+  // },
+  // {
+  //   title: '四通',
+  //   dataIndex: 'siTong',
+  //   key: 'siTong',
+  //   sorter: {
+  //     compare: (a, b) => a.siTong - b.siTong
+  //   }
+  // },
+  // {
+  //   title: '试师',
+  //   dataIndex: 'apprentice',
+  //   key: 'apprentice',
+  //   width: 60,
+  //   sorter: {
+  //     compare: (a, b) => a.apprentice - b.apprentice
+  //   }
+  // },
+  // {
+  //   title: '公示期',
+  //   dataIndex: 'passFairShow',
+  //   key: 'passFairShow',
+  //   width: 60,
+  //   sorter: {
+  //     compare: (a, b) => a.passFairShow - b.passFairShow
+  //   }
+  // },
   // {
   //     title: '状态',
   //     dataIndex: 'status',
@@ -178,30 +178,12 @@ export const ACCOUNT_COLUMNS = [
     }
   },
   {
-    title: '性价比',
+    title: 'S性价比',
     dataIndex: 'seasonScoreRate',
     key: 'seasonScoreRate',
     width: 60,
     sorter: {
       compare: (a, b) => a.seasonScoreRate - b.seasonScoreRate
-    }
-  },
-  {
-    title: '核心',
-    dataIndex: 'coreScore',
-    key: 'coreScore',
-    width: 60,
-    sorter: {
-      compare: (a, b) => a.coreScore - b.coreScore
-    }
-  },
-  {
-    title: '性价比',
-    dataIndex: 'coreScoreRate',
-    key: 'coreScoreRate',
-    width: 60,
-    sorter: {
-      compare: (a, b) => a.coreScoreRate - b.coreScoreRate
     }
   },
   {
@@ -214,12 +196,12 @@ export const ACCOUNT_COLUMNS = [
     }
   },
   {
-    title: '收藏',
-    dataIndex: 'collectNum',
-    key: 'collectNum',
+    title: '性价比',
+    dataIndex: 'scoreRate',
+    key: 'scoreRate',
     width: 60,
     sorter: {
-      compare: (a, b) => a.collectNum - b.collectNum
+      compare: (a, b) => a.scoreRate - b.scoreRate
     }
   },
   {

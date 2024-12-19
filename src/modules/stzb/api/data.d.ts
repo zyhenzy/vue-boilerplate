@@ -14,6 +14,13 @@ export interface ICondition {
     remark: string // 备注
 }
 
+export interface Hero{
+  id: number;
+  name: string;
+  country: string; // '国家 1:汉 2：魏 3：蜀 4：吴 5：群'
+  score: number;
+}
+
 /**
  * 新增条件
  */
@@ -29,13 +36,31 @@ export interface IConditionUpdate extends Partial<ICondition> {
 
 // 账号
 export interface Account{
-    id:string // 主键
-    [key: string]: any;
+  id: string;
+  price: number;
+  heroPrice: number;
+  intermediaryPrice: number;
+  weaponPrice: number;
+  heroList: AccountHero[];
+  weaponList: AccountWeapon[];
+  score: number;
+  heroScore: number;
+  seasonScore: number;
+  scoreRate: number;
+  seasonScoreRate: number;
 }
 
-export interface Hero{
-  id: number;
+export interface Weapon{
+  id: string;
   name: string;
-  country: string; // '国家 1:汉 2：魏 3：蜀 4：吴 5：群'
-  score: number;
+  featureId: string;
+  price: number;
+}
+
+export interface AccountWeapon extends Weapon{
+  featureName: string;
+}
+
+export interface AccountHero extends Omit<Hero, 'score'> {
+  advanceNum: number;
 }
