@@ -95,6 +95,7 @@ const handleInsert = async () =>{
   const game_ordersn = window.prompt('请输入账号')
   if(game_ordersn){
     await requestCreateAccount({conditionId, game_ordersn})
+    await fetchAccountList()
     message.success('新增成功')
   }
 }
