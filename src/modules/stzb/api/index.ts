@@ -72,10 +72,10 @@ export const requestSearchDetail = (id: string) => {
 }
 
 /**
- * 修改价格
+ * 添加账号
  * @param params
  */
-export const requestCreateAccount = (params:{conditionId:string,price:number})=>{
+export const requestCreateAccount = (params:{conditionId:string,game_ordersn:string})=>{
   return request.post('/api/account', params)
 }
 

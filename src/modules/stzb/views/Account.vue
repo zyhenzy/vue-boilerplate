@@ -44,7 +44,7 @@
 
 <script setup lang="ts">
 import {onMounted, ref} from 'vue'
-import {requestSearchDetail, requestUpdatePrice} from '../api'
+import {requestCreateAccount, requestSearchDetail, requestUpdatePrice} from '../api'
 import type {Account} from "@/modules/stzb/api/data";
 import { useRoute } from 'vue-router'
 import {ACCOUNT_COLUMNS} from "@/modules/stzb/condition.config";
@@ -91,10 +91,11 @@ const handleUpdatePrice = async (account: Account) => {
   }
 }
 
-const handleInsert = () =>{
-  const priceStr = window.prompt('请输入账号')
-  if(priceStr){
-    // todo：
+const handleInsert = async () =>{
+  const game_ordersn = window.prompt('请输入账号')
+  if(game_ordersn){
+    await requestCreateAccount({conditionId, game_ordersn})
+    message.success('新增成功')
   }
 }
 
