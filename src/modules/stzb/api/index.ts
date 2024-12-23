@@ -64,12 +64,21 @@ export const requestPreform = (params: ICondition) => {
 
 
 /**
- * 查看详情
+ * 根据条件获取账号列表
  * @param id
  */
 export const requestSearchDetail = (id: string) => {
   return request.get<Account[]>(`/api/account/findByCondition/${id}`)
 }
+
+/**
+ * 修改价格
+ * @param params
+ */
+export const requestCreateAccount = (params:{conditionId:string,price:number})=>{
+  return request.post('/api/account', params)
+}
+
 
 /**
  * 修改价格

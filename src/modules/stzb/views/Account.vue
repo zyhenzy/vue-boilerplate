@@ -1,5 +1,8 @@
 <template>
   <div class="account">
+    <div>
+      <a-button type='primary' @click='handleInsert'>新增账号</a-button>
+    </div>
     <a-table :columns='ACCOUNT_COLUMNS' :data-source='tableData' :scroll='{ x: 1200 }' size='small' bordered>
       <template #bodyCell='{ column, record }'>
         <template v-if="column.key === 'price'">
@@ -22,7 +25,11 @@
             {{record.weaponPrice/100}}
           </span>
         </template>
-
+        <template v-if="column.key === 'status'">
+          <span>
+            {{ getStatusText(record.status) }}
+          </span>
+        </template>
         <template v-if="column.key === 'action'">
           <span>
             <a-button size='small' @click='handleGo(record)'>跳转</a-button>
@@ -83,6 +90,24 @@ const handleUpdatePrice = async (account: Account) => {
     message.success('改价成功')
   }
 }
+
+const handleInsert = () =>{
+  const priceStr = window.prompt('请输入账号')
+  if(priceStr){
+    // todo：
+  }
+}
+
+const getStatusText = (status: number): string => {
+  switch (status) {
+    case 2:
+      return '在售';
+    case 6:
+      return '已售出';
+    default:
+      return '未知状态';
+  }
+};
 </script>
 
 <style lang="scss">
