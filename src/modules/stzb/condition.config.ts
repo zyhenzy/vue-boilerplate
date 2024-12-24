@@ -71,13 +71,13 @@ export const ACCOUNT_COLUMNS = [
     title: 'ID',
     dataIndex: 'id',
     key: 'id',
-    width: 120,
+    width: 80,
   },
   {
     title: '金额',
     dataIndex: 'price',
     key: 'price',
-    width: 120,
+    width: 80,
     sorter: {
       compare: (a: any, b: any) => a.price - b.price
     }
@@ -86,7 +86,7 @@ export const ACCOUNT_COLUMNS = [
     title: '中介报价',
     dataIndex: 'intermediaryPrice',
     key: 'intermediaryPrice',
-    width: 120,
+    width: 80,
     sorter: {
       compare: (a: any, b: any) => a.intermediaryPrice - b.intermediaryPrice
     }
@@ -95,7 +95,7 @@ export const ACCOUNT_COLUMNS = [
     title: '卡片金额',
     dataIndex: 'heroPrice',
     key: 'heroPrice',
-    width: 120,
+    width: 80,
     sorter: {
       compare: (a: any, b: any) => a.heroPrice - b.heroPrice
     }
@@ -104,7 +104,7 @@ export const ACCOUNT_COLUMNS = [
     title: '武器金额',
     dataIndex: 'weaponPrice',
     key: 'weaponPrice',
-    width: 120,
+    width: 80,
     sorter: {
       compare: (a: any, b: any) => a.weaponPrice - b.weaponPrice
     }
@@ -121,6 +121,7 @@ export const ACCOUNT_COLUMNS = [
     title: '武将标签',
     dataIndex: 'heroTag',
     key: 'heroTag',
+    width: 280,
     sorter: {
       compare: (a, b) => a.heroTag.length - b.heroTag.length
     }
