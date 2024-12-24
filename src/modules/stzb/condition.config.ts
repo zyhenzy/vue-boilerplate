@@ -123,7 +123,7 @@ export const ACCOUNT_COLUMNS = [
     key: 'heroTag',
     width: 280,
     sorter: {
-      compare: (a, b) => a.heroTag.length - b.heroTag.length
+      compare: (a:any, b:any) => a.heroTag.length - b.heroTag.length
     }
   },
   // {
@@ -166,7 +166,7 @@ export const ACCOUNT_COLUMNS = [
       key: 'status',
       width: 60,
       sorter: {
-          compare: (a, b) => a.status - b.status
+          compare: (a:any, b:any) => a.status - b.status
       }
   },
   {
