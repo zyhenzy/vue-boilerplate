@@ -43,6 +43,7 @@ export interface Account{
   weaponPrice: number;
   heroList: AccountHero[];
   weaponList: AccountWeapon[];
+  heroTag:string[];
   score: number;
   heroScore: number;
   seasonScore: number;

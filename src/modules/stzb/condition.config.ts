@@ -117,14 +117,14 @@ export const ACCOUNT_COLUMNS = [
   //     compare: (a, b) => a.tag.length - b.tag.length
   //   }
   // },
-  // {
-  //   title: '武将标签',
-  //   dataIndex: 'heroTag',
-  //   key: 'heroTag',
-  //   sorter: {
-  //     compare: (a, b) => a.heroTag.length - b.heroTag.length
-  //   }
-  // },
+  {
+    title: '武将标签',
+    dataIndex: 'heroTag',
+    key: 'heroTag',
+    sorter: {
+      compare: (a, b) => a.heroTag.length - b.heroTag.length
+    }
+  },
   // {
   //   title: '战法标签',
   //   dataIndex: 'skillTag',

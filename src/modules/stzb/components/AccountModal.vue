@@ -22,6 +22,13 @@
       <a-descriptions-item label="综合">{{accountDetail?.score}}</a-descriptions-item>
       <a-descriptions-item label="武将分">{{accountDetail?.heroScore}}</a-descriptions-item>
       <a-descriptions-item label="S赛季分">{{accountDetail?.seasonScore}}</a-descriptions-item>
+      <a-descriptions-item label="高红核心" :span="3">
+        <div v-for='(tag,index) in accountDetail?.heroTag' :key='index'>
+          <a-tag>
+            {{tag}}
+          </a-tag>
+        </div>
+      </a-descriptions-item>
       <a-descriptions-item label="粉武" :span="3">
         <div v-for='(weapon,index) in showWeapon' :key='index'>
           <a-tag>
