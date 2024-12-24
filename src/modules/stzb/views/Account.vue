@@ -34,12 +34,14 @@
           <span>
             <a-button size='small' @click='handleGo(record)'>跳转</a-button>
             <a-button size='small' @click='handleUpdatePrice(record)'>改价</a-button>
-<!--            <a-button @click='handleToDetail(record)' size='small'>查看</a-button>-->
+            <a-button size='small' @click='handleShow(record)'>详情</a-button>
+            <!--            <a-button @click='handleToDetail(record)' size='small'>查看</a-button>-->
           </span>
         </template>
       </template>
     </a-table>
   </div>
+  <account-modal ref='accountModalRef'/>
 </template>
 
 <script setup lang="ts">
@@ -49,9 +51,10 @@ import type {Account} from "@/modules/stzb/api/data";
 import { useRoute } from 'vue-router'
 import {ACCOUNT_COLUMNS} from "@/modules/stzb/condition.config";
 import {message} from "ant-design-vue";
+import AccountModal from "@/modules/stzb/components/AccountModal.vue";
 
 const tableData = ref<Account[]>([])
-
+const accountModalRef = ref()
 let conditionId =''
 
 onMounted(async () => {
@@ -76,6 +79,12 @@ const fetchAccountList = async () => {
 // 跳转到链接
 const handleGo = (account: Account) => {
   window.open(`https://stzb.cbg.163.com/cgi/mweb/equip/1/${account.id}`)
+}
+
+
+// 查看详情
+const handleShow = (account: Account) => {
+  accountModalRef.value.open(account)
 }
 
 /**
