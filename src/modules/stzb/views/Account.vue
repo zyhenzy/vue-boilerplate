@@ -3,7 +3,7 @@
     <div>
       <a-button type='primary' @click='handleInsert'>新增账号</a-button>
     </div>
-    <a-table :columns='ACCOUNT_COLUMNS' :data-source='tableData' :scroll='{ x: 1200 }' size='small' bordered>
+    <a-table :columns='ACCOUNT_COLUMNS' :data-source='tableData' :scroll='{ x: 1800 }' size='small' bordered>
       <template #bodyCell='{ column, record }'>
         <template v-if="column.key === 'price'">
           <span>
@@ -32,17 +32,29 @@
             </a-tag>
           </span>
         </template>
+        <template v-if="column.key === 'skillTag'">
+          <span>
+            <a-tag v-for='(tag,index) in record.skillTag' :key='index' color='red'>
+              {{ tag }}
+            </a-tag>
+          </span>
+        </template>
         <template v-if="column.key === 'status'">
           <span>
             {{ getStatusText(record.status) }}
+          </span>
+        </template>
+        <template v-if="column.key === 'apprentice'">
+          <span>
+            <a-switch v-model:checked="record.apprentice" @change="handleApprenticeChange(record,$event)" />
           </span>
         </template>
         <template v-if="column.key === 'action'">
           <span>
             <a-button size='small' @click='handleGo(record)'>跳转</a-button>
             <a-button size='small' @click='handleUpdatePrice(record)'>改价</a-button>
+            <a-button size='small' @click='handleUpdateRemark(record)'>备注</a-button>
             <a-button size='small' @click='handleShow(record)'>详情</a-button>
-            <!--            <a-button @click='handleToDetail(record)' size='small'>查看</a-button>-->
           </span>
         </template>
       </template>
@@ -53,7 +65,7 @@
 
 <script setup lang="ts">
 import {onMounted, ref} from 'vue'
-import {requestCreateAccount, requestSearchDetail, requestUpdatePrice} from '../api'
+import {requestCreateAccount, requestSearchDetail, requestUpdatePrice, requestUpdateRemark,requestUpdateApprentice} from '../api'
 import type {Account} from "@/modules/stzb/api/data";
 import { useRoute } from 'vue-router'
 import {ACCOUNT_COLUMNS} from "@/modules/stzb/condition.config";
@@ -104,6 +116,23 @@ const handleUpdatePrice = async (account: Account) => {
     await requestUpdatePrice({id:account.id,price:Number(priceStr)})
     await fetchAccountList()
     message.success('改价成功')
+  }
+}
+
+const handleApprenticeChange = async (account: Account,apprentice:boolean) => {
+  await requestUpdateApprentice({id:account.id,apprentice})
+  await fetchAccountList()
+}
+/**
+ * 添加备注
+ * @param account
+ */
+const handleUpdateRemark = async (account: Account) => {
+  const remark = window.prompt('请输入备注')
+  if(remark){
+    await requestUpdateRemark({id:account.id,remark})
+    await fetchAccountList()
+    message.success('添加备注成功')
   }
 }
 

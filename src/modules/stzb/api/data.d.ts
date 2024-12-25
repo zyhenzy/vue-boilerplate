@@ -42,13 +42,26 @@ export interface Account{
   intermediaryPrice: number;
   weaponPrice: number;
   heroList: AccountHero[];
+  skillList: AccountSkill[];
   weaponList: AccountWeapon[];
   heroTag:string[];
+  skillTag:string[];
   score: number;
   heroScore: number;
   seasonScore: number;
   scoreRate: number;
   seasonScoreRate: number;
+  apprentice:boolean;
+  remark:string;
+}
+
+export interface AccountHero extends Omit<Hero, 'score'> {
+  advanceNum: number;
+}
+
+export interface AccountSkill{
+  id: string;
+  name: string;
 }
 
 export interface Weapon{
@@ -62,6 +75,3 @@ export interface AccountWeapon extends Weapon{
   featureName: string;
 }
 
-export interface AccountHero extends Omit<Hero, 'score'> {
-  advanceNum: number;
-}

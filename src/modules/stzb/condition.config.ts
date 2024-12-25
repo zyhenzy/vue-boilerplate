@@ -121,34 +121,26 @@ export const ACCOUNT_COLUMNS = [
     title: '武将标签',
     dataIndex: 'heroTag',
     key: 'heroTag',
-    width: 280,
+    width: 380,
     sorter: {
       compare: (a:any, b:any) => a.heroTag.length - b.heroTag.length
     }
   },
-  // {
-  //   title: '战法标签',
-  //   dataIndex: 'skillTag',
-  //   key: 'skillTag',
-  //   sorter: {
-  //     compare: (a, b) => a.skillTag.length - b.skillTag.length
-  //   }
-  // },
+  {
+    title: '战法标签',
+    dataIndex: 'skillTag',
+    key: 'skillTag',
+    width: 180,
+    sorter: {
+      compare: (a:any, b:any) => a.skillTag.length - b.skillTag.length
+    }
+  },
   // {
   //   title: '四通',
   //   dataIndex: 'siTong',
   //   key: 'siTong',
   //   sorter: {
   //     compare: (a, b) => a.siTong - b.siTong
-  //   }
-  // },
-  // {
-  //   title: '试师',
-  //   dataIndex: 'apprentice',
-  //   key: 'apprentice',
-  //   width: 60,
-  //   sorter: {
-  //     compare: (a, b) => a.apprentice - b.apprentice
   //   }
   // },
   // {
@@ -203,6 +195,21 @@ export const ACCOUNT_COLUMNS = [
     width: 60,
     sorter: {
       compare: (a: any, b: any) => a.scoreRate - b.scoreRate
+    }
+  },
+  {
+    title: '备注',
+    dataIndex: 'remark',
+    key: 'remark',
+    width: 120
+  },
+  {
+    title: '试师',
+    dataIndex: 'apprentice',
+    key: 'apprentice',
+    width: 60,
+    sorter: {
+      compare: (a:any, b:any) => a.apprentice - b.apprentice
     }
   },
   {

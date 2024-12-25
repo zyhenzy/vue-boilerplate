@@ -62,7 +62,6 @@ export const requestPreform = (params: ICondition) => {
   return request.post('/api/condition/perform', params)
 }
 
-
 /**
  * 根据条件获取账号列表
  * @param id
@@ -79,11 +78,26 @@ export const requestCreateAccount = (params:{conditionId:string,game_ordersn:str
   return request.post('/api/account', params)
 }
 
-
 /**
  * 修改价格
  * @param params
  */
 export const requestUpdatePrice = (params:{id:string,price:number})=>{
   return request.post('/api/account/updatePrice', params)
+}
+
+/**
+ * 修改试试状态
+ * @param params
+ */
+export const requestUpdateApprentice = (params:{id:string,apprentice:boolean})=>{
+  return request.post('/api/account/updateApprentice', params)
+}
+
+/**
+ * 修改备注
+ * @param params
+ */
+export const requestUpdateRemark = (params:{id:string,remark:string})=>{
+  return request.post('/api/account/updateRemark', params)
 }
