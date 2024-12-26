@@ -1,9 +1,10 @@
 <template>
   <div class="account">
-    <div>
+    <div style="display: flex">
       <a-button type='primary' @click='handleInsert'>新增账号</a-button>
+      <a-input v-model:value='keyword' />
     </div>
-    <a-table :columns='ACCOUNT_COLUMNS' :data-source='tableData' :scroll='{ x: 1800 }' size='small' bordered>
+    <a-table :columns='ACCOUNT_COLUMNS' :data-source='showList' :scroll='{ x: 1800 }' size='small' bordered>
       <template #bodyCell='{ column, record }'>
         <template v-if="column.key === 'price'">
           <span>
@@ -64,7 +65,7 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from 'vue'
+import {onMounted, ref, computed} from 'vue'
 import {requestCreateAccount, requestSearchDetail, requestUpdatePrice, requestUpdateRemark,requestUpdateApprentice} from '../api'
 import type {Account} from "@/modules/stzb/api/data";
 import { useRoute } from 'vue-router'
@@ -73,6 +74,7 @@ import {message} from "ant-design-vue";
 import AccountModal from "@/modules/stzb/components/AccountModal.vue";
 
 const tableData = ref<Account[]>([])
+const keyword = ref('')
 const accountModalRef = ref()
 let conditionId =''
 
@@ -82,6 +84,13 @@ onMounted(async () => {
     conditionId = route.params.id as string
     await fetchAccountList()
   }
+})
+
+const showList = computed(()=>{
+  if(keyword.value){
+    return tableData.value.filter(item=>item.id.includes(keyword.value))
+  }
+  return tableData.value
 })
 
 // 获取检索列表
