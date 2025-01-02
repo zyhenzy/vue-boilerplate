@@ -56,6 +56,7 @@
             <a-button size='small' @click='handleUpdatePrice(record)'>改价</a-button>
             <a-button size='small' @click='handleUpdateRemark(record)'>备注</a-button>
             <a-button size='small' @click='handleShow(record)'>详情</a-button>
+            <a-button size='small' @click='handleDelete(record)'>删除</a-button>
           </span>
         </template>
       </template>
@@ -66,7 +67,14 @@
 
 <script setup lang="ts">
 import {onMounted, ref, computed} from 'vue'
-import {requestCreateAccount, requestSearchDetail, requestUpdatePrice, requestUpdateRemark,requestUpdateApprentice} from '../api'
+import {
+  requestCreateAccount,
+  requestSearchDetail,
+  requestUpdatePrice,
+  requestUpdateRemark,
+  requestUpdateApprentice,
+  requestDeleteAccount
+} from '../api'
 import type {Account} from "@/modules/stzb/api/data";
 import { useRoute } from 'vue-router'
 import {ACCOUNT_COLUMNS} from "@/modules/stzb/condition.config";
@@ -113,6 +121,12 @@ const handleGo = (account: Account) => {
 // 查看详情
 const handleShow = (account: Account) => {
   accountModalRef.value.open(account)
+}
+
+const handleDelete = async (account: Account)=>{
+  await requestDeleteAccount(account.id)
+  await fetchAccountList()
+  message.success('删除成功')
 }
 
 /**

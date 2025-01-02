@@ -63,6 +63,14 @@ export const requestPreform = (params: ICondition) => {
 }
 
 /**
+ * 重新获取条件下的账号信息
+ * @param id
+ */
+export const requestRefresh = (id: string) => {
+  return request.post('/api/condition/refresh', {id})
+}
+
+/**
  * 根据条件获取账号列表
  * @param id
  */
@@ -100,4 +108,12 @@ export const requestUpdateApprentice = (params:{id:string,apprentice:boolean})=>
  */
 export const requestUpdateRemark = (params:{id:string,remark:string})=>{
   return request.post('/api/account/updateRemark', params)
+}
+
+/**
+ * 删除账号
+ * @param id
+ */
+export const requestDeleteAccount = (id: string) => {
+  return request.delete(`/api/account/${id}`)
 }

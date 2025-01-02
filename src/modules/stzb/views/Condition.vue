@@ -65,6 +65,7 @@
         <template v-else-if="column.key === 'action'">
           <span>
             <a-button @click='handlePerform(record)' size='small'>执行</a-button>
+            <a-button @click='handleRefresh(record)' size='small'>刷新</a-button>
             <a-button @click='handleToDetail(record)' size='small'>查看</a-button>
             <a-button @click='handleDelete(record)' size='small'>删除</a-button>
           </span>
@@ -78,7 +79,7 @@
 <script setup lang="ts">
 import { onMounted, ref} from 'vue'
 import {COLUMNS} from '../condition.config'
-import {requestConditionDelete, requestConditionList, requestPreform, requestSetCookie} from '../api'
+import {requestConditionDelete, requestConditionList, requestPreform, requestRefresh, requestSetCookie} from '../api'
 import type {ICondition} from "@/modules/stzb/api/data";
 import {useHeroStore} from "@/modules/stzb/stores/hero";
 import ConditionModal from "@/modules/stzb/components/ConditionModal.vue";
@@ -115,6 +116,11 @@ const handleSetCookie = async () => {
 // 执行任务
 const handlePerform = (search: ICondition) => {
   requestPreform(search)
+}
+
+// 刷新任务
+const handleRefresh = (search: ICondition) => {
+  requestRefresh(search.id)
 }
 
 // 查看详情
