@@ -36,12 +36,9 @@
 
 <script setup lang='ts'>
 import {onMounted} from "vue";
-import {testData} from "@/modules/stzb/const";
 
 onMounted(()=>{
-  const obj = JSON.parse(testData.equip_desc)
-  console.log(obj)
-  debugger
+
 })
 </script>
 

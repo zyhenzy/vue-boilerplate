@@ -1,9 +1,22 @@
 <template>
   <div class="account">
-    <div style="display: flex">
+    <a-space>
       <a-button type='primary' @click='handleInsert'>新增账号</a-button>
-      <a-input v-model:value='keyword' />
-    </div>
+      <a-input v-model:value='keyword' style="width: 240px" />
+      <a-select
+        ref="select"
+        v-model:value="currentStatus"
+        style="width: 120px"
+      >
+        <a-select-option
+          v-for="(text, key) in statusTextMap"
+          :key="key"
+          :value="Number(key)"
+        >
+          {{ text }}
+        </a-select-option>
+      </a-select>
+    </a-space>
     <a-table :columns='ACCOUNT_COLUMNS' :data-source='showList' :scroll='{ x: 1800 }' size='small' bordered>
       <template #bodyCell='{ column, record }'>
         <template v-if="column.key === 'price'">
@@ -56,6 +69,7 @@
             <a-button size='small' @click='handleUpdatePrice(record)'>改价</a-button>
             <a-button size='small' @click='handleUpdateRemark(record)'>备注</a-button>
             <a-button size='small' @click='handleShow(record)'>详情</a-button>
+            <a-button size='small' @click='handleRefresh(record)'>刷新</a-button>
             <a-button size='small' @click='handleDelete(record)'>删除</a-button>
           </span>
         </template>
@@ -81,9 +95,11 @@ import {ACCOUNT_COLUMNS} from "@/modules/stzb/condition.config";
 import {message, Modal} from "ant-design-vue";
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
 import AccountModal from "@/modules/stzb/components/AccountModal.vue";
+import {statusTextMap} from "@/modules/stzb/const";
 
 const tableData = ref<Account[]>([])
 const keyword = ref('')
+const currentStatus = ref()
 const accountModalRef = ref()
 let conditionId =''
 
@@ -96,10 +112,16 @@ onMounted(async () => {
 })
 
 const showList = computed(()=>{
+  let res=[]
   if(keyword.value){
-    return tableData.value.filter(item=>item.id.includes(keyword.value))
+    res = tableData.value.filter(item=>item.id.includes(keyword.value))
+  }else{
+    res = tableData.value
   }
-  return tableData.value
+  if(currentStatus.value !== undefined && currentStatus.value !== null){
+    res = res.filter(item=>item.status === currentStatus.value)
+  }
+  return res
 })
 
 // 获取检索列表
@@ -122,6 +144,13 @@ const handleGo = (account: Account) => {
 // 查看详情
 const handleShow = (account: Account) => {
   accountModalRef.value.open(account)
+}
+
+// 刷新
+const handleRefresh = async (account: Account) => {
+  await requestCreateAccount({conditionId, game_ordersn:account.id})
+  await fetchAccountList()
+  message.success('刷新成功')
 }
 
 const handleDelete = async (account: Account)=>{
@@ -187,18 +216,7 @@ const handleInsert = async () =>{
 }
 
 const getStatusText = (status: number): string => {
-  switch (status) {
-    case 0:
-      return '已取回';
-    case 1:
-      return '未上架';
-    case 2:
-      return '在售';
-    case 6:
-      return '已售出';
-    default:
-      return '未知状态';
-  }
+  return statusTextMap[status] || '未知状态';
 };
 </script>
 
