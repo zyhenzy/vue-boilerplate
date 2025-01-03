@@ -19,10 +19,15 @@ p{
   width: 800px;
   span{
     display: inline;
-    background-color: greenyellow;
     line-height: 2;
     font-size: 20px;
-    padding-bottom: 40px;
+    /*//padding-bottom: 40px;*/
+    background-color: blue;
+    color: red;
+    background-clip: text;
+    /*
+    //color: transparent; !* 必须将文字颜色设为透明，才能显示背景颜色 *!
+    */
   }
 }
 </style>

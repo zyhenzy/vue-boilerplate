@@ -66,7 +66,7 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref, computed} from 'vue'
+import {onMounted, ref, computed,createVNode} from 'vue'
 import {
   requestCreateAccount,
   requestSearchDetail,
@@ -78,7 +78,8 @@ import {
 import type {Account} from "@/modules/stzb/api/data";
 import { useRoute } from 'vue-router'
 import {ACCOUNT_COLUMNS} from "@/modules/stzb/condition.config";
-import {message} from "ant-design-vue";
+import {message, Modal} from "ant-design-vue";
+import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
 import AccountModal from "@/modules/stzb/components/AccountModal.vue";
 
 const tableData = ref<Account[]>([])
@@ -124,9 +125,26 @@ const handleShow = (account: Account) => {
 }
 
 const handleDelete = async (account: Account)=>{
-  await requestDeleteAccount(account.id)
-  await fetchAccountList()
-  message.success('删除成功')
+  const _delAccount = async ()=>{
+    await requestDeleteAccount(account.id)
+    await fetchAccountList()
+    message.success('删除成功')
+  }
+  if(account.remark){
+    Modal.confirm({
+      title: '删除确认',
+      icon: createVNode(ExclamationCircleOutlined),
+      content: '该账号性价比很高，要确定删除吗',
+      okText: '是',
+      okType: 'danger',
+      cancelText: '否',
+      onOk:async ()=> {
+        await _delAccount()
+      }
+    });
+  }else {
+    await _delAccount()
+  }
 }
 
 /**
@@ -170,6 +188,10 @@ const handleInsert = async () =>{
 
 const getStatusText = (status: number): string => {
   switch (status) {
+    case 0:
+      return '已取回';
+    case 1:
+      return '未上架';
     case 2:
       return '在售';
     case 6:
