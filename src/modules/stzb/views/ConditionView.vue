@@ -140,9 +140,3 @@ const handleDelete = async (condition: ICondition) => {
 }
 
 </script>
-
-<style lang="scss">
-.condition {
-
-}
-</style>

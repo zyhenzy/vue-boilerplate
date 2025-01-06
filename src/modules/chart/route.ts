@@ -1,12 +1,11 @@
-import ChartView from "./views/Chart.vue";
+import type { RouteRecordRaw } from 'vue-router';
 
-/**
- * 条件路由
- */
-export const chartRoute = [
-    {
-        path: '/chart',
-        name: 'chart',
-        component: ChartView,
-    },
-]
+const ChartView = () => import('./views/Chart.vue');
+
+export const chartRoute: RouteRecordRaw[] = [
+  {
+    path: '/chart',
+    name: 'chart',
+    component: ChartView,
+  },
+];

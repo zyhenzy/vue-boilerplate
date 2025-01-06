@@ -16,7 +16,7 @@ import {cloneDeep} from "lodash-es";
 /**
  * 查询所有英雄
  */
-export const requestHeroes = ()=>{
+export const requestHeroes = () => {
   return request.get<Hero[]>('/api/hero')
 }
 
@@ -26,7 +26,7 @@ export const requestHeroes = ()=>{
  */
 export const requestSetCookie = (cookie: string) => {
   const params = {cookie}
-  return request.post(`/api/condition/setCookie`,params)
+  return request.post(`/api/condition/setCookie`, params)
 }
 
 /**
@@ -82,7 +82,7 @@ export const requestSearchDetail = (id: string) => {
  * 添加账号
  * @param params
  */
-export const requestCreateAccount = (params:{conditionId:string,game_ordersn:string})=>{
+export const requestCreateAccount = (params: { conditionId: string, game_ordersn: string }) => {
   return request.post('/api/account', params)
 }
 
@@ -90,7 +90,7 @@ export const requestCreateAccount = (params:{conditionId:string,game_ordersn:str
  * 修改价格
  * @param params
  */
-export const requestUpdatePrice = (params:{id:string,price:number})=>{
+export const requestUpdatePrice = (params: { id: string, price: number }) => {
   return request.post('/api/account/updatePrice', params)
 }
 
@@ -98,7 +98,7 @@ export const requestUpdatePrice = (params:{id:string,price:number})=>{
  * 修改试试状态
  * @param params
  */
-export const requestUpdateApprentice = (params:{id:string,apprentice:boolean})=>{
+export const requestUpdateApprentice = (params: { id: string, apprentice: boolean }) => {
   return request.post('/api/account/updateApprentice', params)
 }
 
@@ -106,7 +106,7 @@ export const requestUpdateApprentice = (params:{id:string,apprentice:boolean})=>
  * 修改备注
  * @param params
  */
-export const requestUpdateRemark = (params:{id:string,remark:string})=>{
+export const requestUpdateRemark = (params: { id: string, remark: string }) => {
   return request.post('/api/account/updateRemark', params)
 }
 

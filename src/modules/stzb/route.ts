@@ -1,11 +1,10 @@
-import HeroView from "./views/Hero.vue";
-import ConditionView from "./views/Condition.vue";
-import AccountView from "./views/Account.vue";
+import type { RouteRecordRaw } from 'vue-router';
 
-/**
- * 条件路由
- */
-export const stzbRoute = [
+const HeroView = () => import('./views/HeroView.vue');
+const ConditionView = () => import('./views/ConditionView.vue');
+const AccountView = () => import('./views/AccountView.vue');
+
+export const stzbRoute: RouteRecordRaw[] = [
   {
     path: '/hero',
     name: 'hero',

@@ -1,12 +1,3 @@
-<!--
-    @Name: 新增/修改搜索
-    @Description: 新增/修改搜索
-    @Author: ying.zhang_zhang
-    @Date: 2023/12/14 15:46
-    @LastEditors: ying.zhang_zhang
-    @LastEditTime: 2023/12/14 15:46
-    @Url: src/views/stzb/components/SearchModal.vue
--->
 <template>
   <a-modal
     v-model:visible='visible'

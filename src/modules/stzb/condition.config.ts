@@ -1,3 +1,5 @@
+import type {Account} from "@/modules/stzb/api/data";
+
 export const COLUMNS = [
   {
     name: '金额',
@@ -79,7 +81,7 @@ export const ACCOUNT_COLUMNS = [
     key: 'price',
     width: 80,
     sorter: {
-      compare: (a: any, b: any) => a.price - b.price
+      compare: (a: Account, b: Account) => a.price - b.price
     }
   },
   {
@@ -88,7 +90,7 @@ export const ACCOUNT_COLUMNS = [
     key: 'intermediaryPrice',
     width: 80,
     sorter: {
-      compare: (a: any, b: any) => a.intermediaryPrice - b.intermediaryPrice
+      compare: (a: Account, b: Account) => a.intermediaryPrice - b.intermediaryPrice
     }
   },
   {
@@ -97,7 +99,7 @@ export const ACCOUNT_COLUMNS = [
     key: 'heroPrice',
     width: 80,
     sorter: {
-      compare: (a: any, b: any) => a.heroPrice - b.heroPrice
+      compare: (a: Account, b: Account) => a.heroPrice - b.heroPrice
     }
   },
   {
@@ -106,7 +108,7 @@ export const ACCOUNT_COLUMNS = [
     key: 'weaponPrice',
     width: 80,
     sorter: {
-      compare: (a: any, b: any) => a.weaponPrice - b.weaponPrice
+      compare: (a: Account, b: Account) => a.weaponPrice - b.weaponPrice
     }
   },
   // {
@@ -123,7 +125,7 @@ export const ACCOUNT_COLUMNS = [
     key: 'heroTag',
     width: 380,
     sorter: {
-      compare: (a:any, b:any) => a.heroTag.length - b.heroTag.length
+      compare: (a:Account, b:Account) => a.heroTag.length - b.heroTag.length
     }
   },
   {
@@ -132,7 +134,7 @@ export const ACCOUNT_COLUMNS = [
     key: 'skillTag',
     width: 180,
     sorter: {
-      compare: (a:any, b:any) => a.skillTag.length - b.skillTag.length
+      compare: (a:Account, b:Account) => a.skillTag.length - b.skillTag.length
     }
   },
   // {
@@ -158,7 +160,7 @@ export const ACCOUNT_COLUMNS = [
       key: 'status',
       width: 60,
       sorter: {
-          compare: (a:any, b:any) => a.status - b.status
+          compare: (a:Account, b:Account) => a.status - b.status
       }
   },
   {
@@ -167,7 +169,7 @@ export const ACCOUNT_COLUMNS = [
     key: 'seasonScore',
     width: 60,
     sorter: {
-      compare: (a: any, b: any) => a.seasonScore - b.seasonScore
+      compare: (a: Account, b: Account) => a.seasonScore - b.seasonScore
     }
   },
   {
@@ -176,7 +178,7 @@ export const ACCOUNT_COLUMNS = [
     key: 'seasonScoreRate',
     width: 60,
     sorter: {
-      compare: (a: any, b: any) => a.seasonScoreRate - b.seasonScoreRate
+      compare: (a: Account, b: Account) => a.seasonScoreRate - b.seasonScoreRate
     }
   },
   {
@@ -185,7 +187,7 @@ export const ACCOUNT_COLUMNS = [
     key: 'score',
     width: 60,
     sorter: {
-      compare: (a: any, b: any) => a.score - b.score
+      compare: (a: Account, b: Account) => a.score - b.score
     }
   },
   {
@@ -194,7 +196,7 @@ export const ACCOUNT_COLUMNS = [
     key: 'scoreRate',
     width: 60,
     sorter: {
-      compare: (a: any, b: any) => a.scoreRate - b.scoreRate
+      compare: (a: Account, b: Account) => a.scoreRate - b.scoreRate
     }
   },
   {
@@ -209,7 +211,7 @@ export const ACCOUNT_COLUMNS = [
     key: 'apprentice',
     width: 60,
     sorter: {
-      compare: (a:any, b:any) => a.apprentice - b.apprentice
+      compare: (a:Account, b:Account) => Number(a.apprentice) - Number(b.apprentice)
     }
   },
   {

@@ -219,9 +219,3 @@ const getStatusText = (status: number): string => {
   return statusTextMap[status] || '未知状态';
 };
 </script>
-
-<style lang="scss">
-.account {
-
-}
-</style>
