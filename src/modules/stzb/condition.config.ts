@@ -111,14 +111,15 @@ export const ACCOUNT_COLUMNS = [
       compare: (a: Account, b: Account) => a.weaponPrice - b.weaponPrice
     }
   },
-  // {
-  //   title: '标签',
-  //   dataIndex: 'tag',
-  //   key: 'tag',
-  //   sorter: {
-  //     compare: (a, b) => a.tag.length - b.tag.length
-  //   }
-  // },
+  {
+    title: '标签',
+    dataIndex: 'tag',
+    key: 'tag',
+    width: 80,
+    sorter: {
+      compare: (a: Account, b: Account) => a.tag.length - b.tag.length
+    }
+  },
   {
     title: '武将标签',
     dataIndex: 'heroTag',

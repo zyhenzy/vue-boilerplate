@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 import Layout from '../components/layout/Layout.vue'
 import { stzbRoute } from '@/modules/stzb/route'
 import { chartRoute } from '@/modules/chart/route'
+import { es6Route } from '@/modules/es6/route'
 
 const REDIRECT_NAME = 'about' // 重定向路由
 
@@ -18,7 +19,8 @@ const routes: RouteRecordRaw[] = [
         component: () => import('../views/AboutView.vue'),
       },
       ...stzbRoute,
-      ...chartRoute
+      ...chartRoute,
+      ...es6Route
     ]
   }
 ]

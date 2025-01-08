@@ -39,6 +39,13 @@
             {{record.weaponPrice/100}}
           </span>
         </template>
+        <template v-if="column.key === 'tag'">
+          <span>
+            <a-tag v-for='(tag,index) in record.tag' :key='index' color='blue'>
+              {{ tag }}
+            </a-tag>
+          </span>
+        </template>
         <template v-if="column.key === 'heroTag'">
           <span>
             <a-tag v-for='(tag,index) in record.heroTag' :key='index' color='green'>

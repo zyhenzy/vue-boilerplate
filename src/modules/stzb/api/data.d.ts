@@ -44,6 +44,7 @@ export interface Account{
   heroList: AccountHero[];
   skillList: AccountSkill[];
   weaponList: AccountWeapon[];
+  tag:string[];
   heroTag:string[];
   skillTag:string[];
   score: number;

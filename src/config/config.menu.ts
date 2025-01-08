@@ -24,5 +24,11 @@ export const MENUS = [
     name: '关于',
     icon: BranchesOutlined,
     path: '/about',
+  },
+  {
+    key: 'promise',
+    name: 'promise',
+    icon: BranchesOutlined,
+    path: '/promise',
   }
 ]
