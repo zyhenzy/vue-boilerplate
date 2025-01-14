@@ -53,6 +53,7 @@ export interface Account{
   scoreRate: number;
   seasonScoreRate: number;
   apprentice:boolean;
+  isNew:boolean;
   status:number;
   remark:string;
 }

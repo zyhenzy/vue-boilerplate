@@ -207,6 +207,15 @@ export const ACCOUNT_COLUMNS = [
     width: 120
   },
   {
+    title: '新号',
+    dataIndex: 'isNew',
+    key: 'isNew',
+    width: 60,
+    sorter: {
+      compare: (a:Account, b:Account) => Number(a.isNew) - Number(b.isNew)
+    }
+  },
+  {
     title: '试师',
     dataIndex: 'apprentice',
     key: 'apprentice',

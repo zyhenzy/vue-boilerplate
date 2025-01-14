@@ -70,6 +70,11 @@
             <a-switch v-model:checked="record.apprentice" @change="handleApprenticeChange(record,$event)" />
           </span>
         </template>
+        <template v-if="column.key === 'isNew'">
+          <span>
+            <a-tag v-if="record.isNew" color="#f50">新</a-tag>
+          </span>
+        </template>
         <template v-if="column.key === 'action'">
           <span>
             <a-button size='small' @click='handleGo(record)'>跳转</a-button>
