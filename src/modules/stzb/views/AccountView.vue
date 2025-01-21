@@ -6,6 +6,8 @@
       <a-select
         ref="select"
         v-model:value="currentStatus"
+        mode="multiple"
+        allow-clear
         style="width: 120px"
       >
         <a-select-option
@@ -130,8 +132,8 @@ const showList = computed(()=>{
   }else{
     res = tableData.value
   }
-  if(currentStatus.value !== undefined && currentStatus.value !== null){
-    res = res.filter(item=>item.status === currentStatus.value)
+  if(currentStatus.value !== undefined && currentStatus.value !== null&&currentStatus.value.length>0){
+    res = res.filter(item=>currentStatus.value.includes(item.status))
   }
   return res
 })
