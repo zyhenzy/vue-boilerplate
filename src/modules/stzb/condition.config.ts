@@ -201,6 +201,15 @@ export const ACCOUNT_COLUMNS = [
     }
   },
   {
+    title: '核心齐',
+    dataIndex: 'completeCore',
+    key: 'completeCore',
+    width: 60,
+    sorter: {
+      compare: (a:Account, b:Account) => Number(a.completeCore) - Number(b.completeCore)
+    }
+  },
+  {
     title: '备注',
     dataIndex: 'remark',
     key: 'remark',

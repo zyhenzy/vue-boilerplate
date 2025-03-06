@@ -18,6 +18,7 @@
           {{ text }}
         </a-select-option>
       </a-select>
+      <a-switch v-model:checked="completeCore" checked-children="全" />
     </a-space>
     <a-table :columns='ACCOUNT_COLUMNS' :data-source='showList' :scroll='{ x: 1800 }' size='small' bordered>
       <template #bodyCell='{ column, record }'>
@@ -72,6 +73,11 @@
             <a-switch v-model:checked="record.apprentice" @change="handleApprenticeChange(record,$event)" />
           </span>
         </template>
+        <template v-if="column.key === 'completeCore'">
+          <span>
+            <a-tag v-if="record.completeCore" color="#108ee9">全</a-tag>
+          </span>
+        </template>
         <template v-if="column.key === 'isNew'">
           <span>
             <a-tag v-if="record.isNew" color="#f50">新</a-tag>
@@ -113,6 +119,7 @@ import {statusTextMap} from "@/modules/stzb/const";
 
 const tableData = ref<Account[]>([])
 const keyword = ref('')
+const completeCore = ref(true)
 const currentStatus = ref()
 const accountModalRef = ref()
 let conditionId =''
@@ -131,6 +138,9 @@ const showList = computed(()=>{
     res = tableData.value.filter(item=>item.id.includes(keyword.value))
   }else{
     res = tableData.value
+  }
+  if(completeCore.value){
+    res = res.filter(item=>item.completeCore)
   }
   if(currentStatus.value !== undefined && currentStatus.value !== null&&currentStatus.value.length>0){
     res = res.filter(item=>currentStatus.value.includes(item.status))

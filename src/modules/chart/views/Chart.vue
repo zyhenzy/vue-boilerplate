@@ -1,42 +1,164 @@
 <template>
   <div class="chart">
-    <a-row>
-      <a-col :span="8">
-        <bar-echart title='基础柱状图' :x-data='monthRange' :y-data='data' class='bar-chart' />
-      </a-col>
-      <a-col :span="8">
-        <pie-echart title='基础饼状图' :data='dataB' class='pie-chart' />
-      </a-col>
-      <a-col :span="8">
-        <line-echart title='基础折线图' :x-data='monthRange' :y-data='lineData' class='line-echart' />
-      </a-col>
-    </a-row>
+    <chart-header/>
+    <div class="chart-body">
+      <chart-bar :data="barData"/>
+      <div class="chart-container">
+        <div class="left-or-right">
+          <chart-gather :data="gatherData"/>
+          <chart-charge :data="chargeData"/>
+        </div>
+        <div class="middle">
+          <chart-map/>
+        </div>
+        <div class="left-or-right">
+          <chart-gather-today :data="gatherTodayData"/>
+          <chart-hospitalization-today :data="hospitalizationTodayData"/>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang='ts'>
-import BarEchart from "@/modules/chart/components/BarEchart.vue";
-import PieEchart from "@/modules/chart/components/PieEchart.vue";
-import LineEchart from "@/modules/chart/components/LineEchart.vue";
+import ChartHeader from "@/modules/chart/components/ChartHeader.vue";
+import ChartBar from "@/modules/chart/components/ChartBar.vue";
+import ChartGather from "@/modules/chart/components/ChartGather.vue";
+import {
+  requestChargeData,
+  requestGather,
+  requestHospitalization,
+  requestHospitalPosition,
+  requestOutpatient
+} from "@/modules/chart/api";
+import {ref,computed, onMounted} from "vue";
+import ChartCharge from "@/modules/chart/components/ChartCharge.vue";
+import ChartMap from "@/modules/chart/components/ChartMap.vue";
+import ChartGatherToday from "@/modules/chart/components/ChartGatherToday.vue";
+import ChartHospitalizationToday from "@/modules/chart/components/ChartHospitalizationToday.vue";
 
-const monthRange = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] // 月份范围
-const data = [120, 200, 150, 80, 70, 110, 130] // 数据
-const dataB = [
-  { value: 1048, name: 'Search Engine' },
-  { value: 735, name: 'Direct' },
-  { value: 580, name: 'Email' },
-  { value: 484, name: 'Union Ads' },
-  { value: 300, name: 'Video Ads' }
-]
-const lineData = [150, 230, 224, 218, 135, 147, 260] // 数据
+const data = ref()
 
+onMounted(()=>{
+  fetchData().then(res=>{
+    data.value = res
+    console.log('数据：')
+    console.log(res);
+  })
+})
+
+const barData = computed(()=>{
+  return data.value? [
+    {
+      total: data.value.gather.allgather,
+      month: data.value.gather.monthegather
+    },
+    {
+      total: data.value.hospitalization.allHospitalization,
+      month: data.value.hospitalization.montHospitalization
+    },
+    {
+      total: data.value.outpatient.allOutpatient,
+      month: data.value.outpatient.monthOutpatient
+    },
+  ]:[]
+})
+
+const gatherData = computed(()=>{
+  return data.value? data.value.gather.hospital.map((item:any)=>{
+    return {
+      name: item.hospitalName,
+      value: item.number
+    }
+  }):[]
+})
+
+const chargeData = computed(()=>{
+  const res =  data.value? data.value.gather.hospital.map((item:any)=>{
+    const _name = item.hospitalName;
+    const _dataarr = []
+    data.value.chargeData.forEach((chargeItem:any) => {
+      if (chargeItem.hospitalName === _name) {
+        _dataarr.push(chargeItem.perCapita)
+      }
+    })
+    data.value.outpatient.hospital.forEach((outpatientiItem:any) => {
+      if (outpatientiItem.hospitalName === _name) {
+        _dataarr.push(outpatientiItem.number)
+      }
+    })
+    _dataarr.push(item.number)
+    return {
+      name: _name,
+      data: _dataarr
+    }
+  }):[]
+  console.log('各医院平均费用')
+  console.log(res)
+  return res
+})
+
+const gatherTodayData = computed(()=>{
+  return data.value? data.value.gather.hospital.map((item:any)=>{
+    const _todayData = item.today.map((todayItem:any) => {
+      return todayItem.value
+    })
+    return {
+      name: item.hospitalName,
+      data: _todayData
+    }
+  }):[]
+})
+
+const hospitalizationTodayData = computed(()=>{
+  return data.value? data.value.hospitalization.hospital.map((item:any)=>{
+    const _todayData = item.today.map((todayItem:any) => {
+      return todayItem.value
+    })
+    return {
+      name: item.hospitalName,
+      data: _todayData
+    }
+  }):[]
+})
+
+const fetchData = async () => {
+  const chargeData = await requestChargeData();
+  const gather = await requestGather();
+  const hospitalization = await requestHospitalization();
+  const outpatient = await requestOutpatient();
+  const hospitalPosition = await requestHospitalPosition();
+  return {
+    chargeData,
+    gather,
+    hospitalization,
+    outpatient,
+    hospitalPosition
+  }
+}
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .chart {
-  .bar-chart {
-    width: 100%;
-    height: 300px;
+  width: 100vw;
+  height: 100vh;
+  background-color: #081832;
+  .chart-body{
+    width: 100vw;
+    box-sizing: border-box;
+    padding: 1.85vh 1.04vw;
+    .chart-container{
+      padding-top: 5.09vh;
+      display: flex;
+      justify-content: space-between;
+
+      .left-or-right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    }
   }
+
 }
 </style>

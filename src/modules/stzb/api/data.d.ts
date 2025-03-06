@@ -52,6 +52,7 @@ export interface Account{
   seasonScore: number;
   scoreRate: number;
   seasonScoreRate: number;
+  completeCore:boolean;
   apprentice:boolean;
   isNew:boolean;
   status:number;

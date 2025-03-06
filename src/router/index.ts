@@ -19,10 +19,10 @@ const routes: RouteRecordRaw[] = [
         component: () => import('../views/AboutView.vue'),
       },
       ...stzbRoute,
-      ...chartRoute,
       ...es6Route
     ]
-  }
+  },
+  ...chartRoute,
 ]
 
 const router = createRouter({
