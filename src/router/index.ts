@@ -18,6 +18,11 @@ const routes: RouteRecordRaw[] = [
         name: 'about',
         component: () => import('../views/AboutView.vue'),
       },
+      {
+        path: '/test',
+        name: 'test',
+        component: () => import('../views/TestView.vue'),
+      },
       ...stzbRoute,
       ...es6Route
     ]
