@@ -13,6 +13,11 @@ export default defineConfig({
       '/api':{
         target: 'http://localhost:4869',
         changeOrigin: true,
+      },
+      '/aiApi':{
+        target: 'http://127.0.0.1:11434',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/aiApi/, '/api') // Maps to /api/generate
       }
     },
   },

@@ -3,6 +3,7 @@ import Layout from '../components/layout/Layout.vue'
 import { stzbRoute } from '@/modules/stzb/route'
 import { chartRoute } from '@/modules/chart/route'
 import { es6Route } from '@/modules/es6/route'
+import { aigcRoute } from '@/modules/aigc/route'
 
 const REDIRECT_NAME = 'about' // 重定向路由
 
@@ -24,7 +25,8 @@ const routes: RouteRecordRaw[] = [
         component: () => import('../views/TestView.vue'),
       },
       ...stzbRoute,
-      ...es6Route
+      ...es6Route,
+      ...aigcRoute
     ]
   },
   ...chartRoute,

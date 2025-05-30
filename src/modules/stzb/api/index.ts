@@ -10,7 +10,7 @@
 
 import request from "@/utils/request/request";
 import requestNoRepeat from "@/utils/request/request-no-repeat";
-import type {Account, Hero, ICondition, IConditionCreate} from "./data";
+import type { Account, Hero, IAiSearch, ICondition, IConditionCreate, jsonSearch } from './data'
 import {cloneDeep} from "lodash-es";
 
 /**
@@ -76,6 +76,22 @@ export const requestRefresh = (id: string) => {
  */
 export const requestSearchDetail = (id: string) => {
   return request.get<Account[]>(`/api/account/findByCondition/${id}`)
+}
+
+/**
+ * AI解读中介信息，并检索
+ * @param params
+ */
+export const requestAiSearch = (params:IAiSearch)=>{
+  return request.post('/api/condition/intermediary', params)
+}
+
+/**
+ * 以中介信息JSON格式插入账号
+ * @param params
+ */
+export const requestInsertJson = (params:jsonSearch)=>{
+  return request.post('/api/condition/insertJSON', params)
 }
 
 /**

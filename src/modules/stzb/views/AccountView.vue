@@ -2,6 +2,8 @@
   <div class="account">
     <a-space>
       <a-button type='primary' @click='handleInsert'>新增账号</a-button>
+      <a-button type='primary' @click='aiInsert'>AI解读中介信息</a-button>
+      <a-button type='primary' @click='jsonInsert'>JSON中介信息录入</a-button>
       <a-input v-model:value='keyword' style="width: 240px" />
       <a-select
         ref="select"
@@ -107,7 +109,7 @@ import {
   requestUpdatePrice,
   requestUpdateRemark,
   requestUpdateApprentice,
-  requestDeleteAccount
+  requestDeleteAccount, requestAiSearch, requestInsertJson
 } from '../api'
 import type {Account} from "@/modules/stzb/api/data";
 import { useRoute } from 'vue-router'
@@ -236,6 +238,43 @@ const handleInsert = async () =>{
     await requestCreateAccount({conditionId, game_ordersn})
     await fetchAccountList()
     message.success('新增成功')
+  }
+}
+
+const aiInsert = async ()=>{
+  const res = await requestAiSearch({
+    id: conditionId,
+    info:'7000议价出，14红徐晃蜀骑 13红核弹 11红撸铁 鬼吕网红 。SS5273\n' +
+      '\n' +
+      'https://stzb.cbg.163.com/cgi/mweb/equip/1/202505200102116-1-PVPNPIDL9NHDXO\n' +
+      '\n' +
+      '\n' +
+      '\n' +
+      '6500议价出，乘胜百战，满红马岱张绣严颜夏侯，有程昱，马良，2红张机吕蒙，11红蜀骑，11红百战夏侯，9红核弹弓，有蓝级马弓晓锐11。SS1108\n' +
+      '\n' +
+      'https://stzb.cbg.163.com/cgi/mweb/equip/1/202505192302116-1-NTC7OVFASZDJFU\n' +
+      '\n' +
+      '\n' +
+      '\n' +
+      '11000议价出，主城12袁绍刀9大张张12百战螃蟹，19稀世2粉。SS32613\n' +
+      '\n' +
+      'https://stzb.cbg.163.com/cgi/mweb/equip/1/202505181202116-1-RKEYNEARFO7ITO'
+  })
+  console.log(res)
+}
+
+const jsonInsert = async ()=>{
+  const jsonStr = window.prompt('请输入JSON中介信息')
+  if(jsonStr){
+    try {
+      const jsonData = JSON.parse(jsonStr)
+      await requestInsertJson({id:conditionId, idAndPriceList: jsonData})
+      await fetchAccountList()
+      message.success('新增成功')
+    } catch (error) {
+      console.error(error)
+      message.error('JSON格式错误，请检查后重试')
+    }
   }
 }
 

@@ -20,6 +20,12 @@ export const MENUS = [
     path: '/condition',
   },
   {
+    key: 'aigc',
+    name: 'AIGC',
+    icon: BranchesOutlined,
+    path: '/aigc',
+  },
+  {
     key: 'about',
     name: '关于',
     icon: BranchesOutlined,
