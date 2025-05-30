@@ -4,13 +4,18 @@
       <a-button type='primary' @click='handleInsert'>新增账号</a-button>
       <a-button type='primary' @click='aiInsert'>AI解读中介信息</a-button>
       <a-button type='primary' @click='jsonInsert'>JSON中介信息录入</a-button>
-      <a-input v-model:value='keyword' style="width: 240px" />
+      <a-space>
+        <a-input-number v-model:value="minPrice" placeholder="最低价格" style="width: 120px" />
+        <a-input-number v-model:value="maxPrice" placeholder="最高价格" style="width: 120px" />
+      </a-space>
+      <a-input v-model:value='keyword' placeholder="ID筛选" style="width: 240px" />
       <a-select
         ref="select"
         v-model:value="currentStatus"
         mode="multiple"
         allow-clear
         style="width: 120px"
+        placeholder="选择状态"
       >
         <a-select-option
           v-for="(text, key) in statusTextMap"
@@ -123,6 +128,8 @@ const tableData = ref<Account[]>([])
 const keyword = ref('')
 const completeCore = ref(true)
 const currentStatus = ref()
+const minPrice = ref<number | null>(null)
+const maxPrice = ref<number | null>(null)
 const accountModalRef = ref()
 let conditionId =''
 
@@ -146,6 +153,18 @@ const showList = computed(()=>{
   }
   if(currentStatus.value !== undefined && currentStatus.value !== null&&currentStatus.value.length>0){
     res = res.filter(item=>currentStatus.value.includes(item.status))
+  }
+  if (minPrice.value !== null) {
+    res = res.filter(item => {
+      const priceToFilter = item.intermediaryPrice ?? item.price
+      return priceToFilter / 100 >= minPrice.value
+    })
+  }
+  if (maxPrice.value !== null) {
+    res = res.filter(item => {
+      const priceToFilter = item.intermediaryPrice ?? item.price
+      return priceToFilter / 100 <= maxPrice.value
+    })
   }
   return res
 })
