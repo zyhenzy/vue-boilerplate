@@ -126,7 +126,7 @@ import {statusTextMap} from "@/modules/stzb/const";
 
 const tableData = ref<Account[]>([])
 const keyword = ref('')
-const completeCore = ref(true)
+const completeCore = ref(false)
 const currentStatus = ref()
 const minPrice = ref<number | null>(null)
 const maxPrice = ref<number | null>(null)
